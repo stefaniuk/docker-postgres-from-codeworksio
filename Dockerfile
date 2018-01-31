@@ -1,5 +1,7 @@
 FROM codeworksio/ubuntu:16.04-20180130
 
+# SEE: https://github.com/docker-library/postgres/blob/master/10/Dockerfile
+
 ARG APT_PROXY
 ARG APT_PROXY_SSL
 ENV PG_MAJOR="10" \
