@@ -1,11 +1,11 @@
-FROM codeworksio/ubuntu:16.04-20180130
+FROM codeworksio/ubuntu:18.04-20180203
 
 # SEE: https://github.com/docker-library/postgres/blob/master/10/Dockerfile
 
 ARG APT_PROXY
 ARG APT_PROXY_SSL
 ENV PG_MAJOR="10" \
-    PG_VERSION="10.1-1.pgdg16.04+1" \
+    PG_VERSION="10.1-2" \
     PATH="$PATH:/usr/lib/postgresql/10/bin" \
     PGDATA="/var/lib/postgresql/data"
 
@@ -18,7 +18,7 @@ RUN set -ex \
     && groupmod -n postgres ubuntu \
     \
     && apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys "B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8" \
-    && echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main $PG_MAJOR" > /etc/apt/sources.list.d/postgres.list \
+    && echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main $PG_MAJOR" > /etc/apt/sources.list.d/postgres.list \
     && apt-get --yes update \
     && apt-get --yes install \
         postgresql-$PG_MAJOR=$PG_VERSION \
