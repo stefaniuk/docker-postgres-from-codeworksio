@@ -48,6 +48,7 @@ test:
 
 bash:
 	docker exec --interactive --tty \
+		--user root \
 		$(NAME) \
 		/bin/bash --login ||:
 
