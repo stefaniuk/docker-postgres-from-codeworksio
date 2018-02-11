@@ -42,7 +42,7 @@ log:
 
 test:
 	docker exec --interactive --tty \
-		--user "postgres" \
+		--user postgres \
 		$(NAME) \
 		ps auxw
 
