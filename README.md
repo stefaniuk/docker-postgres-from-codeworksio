@@ -20,5 +20,4 @@ Alternatively you can build the image yourself.
 Testing
 -------
 
-    make build start log
-    make stop
+    make build test

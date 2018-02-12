@@ -1,15 +1,9 @@
 machine:
   services:
     - docker
-dependencies:
-  cache_directories:
-    - "~/docker"
-  override:
-    - docker info
-    - if [[ -e ~/docker/image.tar ]]; then docker load --input ~/docker/image.tar; fi
-    - docker build --tag codeworksio/postgres .
-    - mkdir -p ~/docker; docker save codeworksio/postgres > ~/docker/image.tar
 test:
   override:
-    - docker run --detach --interactive --tty --name postgres codeworksio/postgres; sleep 10
-    - docker logs postgres | grep "database system is ready to accept connections"
+    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+    - make build
+    - make test
+    - make push

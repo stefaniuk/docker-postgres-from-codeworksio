@@ -41,10 +41,9 @@ log:
 	docker logs --follow $(NAME)
 
 test:
-	docker exec --interactive --tty \
-		--user postgres \
-		$(NAME) \
-		ps auxw
+	docker run --detach --interactive --tty --name postgres codeworksio/postgres
+	sleep 10
+	docker logs postgres | grep "database system is ready to accept connections"
 
 bash:
 	docker exec --interactive --tty \
@@ -59,6 +58,7 @@ clean:
 push:
 	docker push $(IMAGE):$(shell cat VERSION)
 	docker push $(IMAGE):latest
+	sleep 10
 	curl --request POST "https://hooks.microbadger.com/images/$(IMAGE)/-_8Vk4GYHIizTx03R8D3yYVzySk="
 
 .SILENT:
